@@ -1,3 +1,19 @@
+/*
+==============================================
+Stored Procedure: Load Bronze Layer (Source -> Bronze)
+==============================================
+Script purpose:
+	This script loads data into the 'bronze' schema from CSV files, performing the following:
+	- Truncate tables before loading data.
+	- Use 'BULK INSERT' command for loading.
+	- Calcuate the time of loading for each table and the whole batch as well.
+
+No parameters required for this procedure.
+
+Use the following command for execution:
+	- EXEC bronze.load_bronze;
+*/
+
 CREATE or ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME
