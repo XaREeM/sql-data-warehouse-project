@@ -55,6 +55,32 @@ Below is the visual representation of how the **CRM** and **ERP** systems are in
 ```
 ---
 
+### 💎 Final Analytical Model: Sales Data Mart (Star Schema)
+
+This is the finalized, Gold-tier database schema. It uses a **Star Schema** architecture to optimize query performance for retail analytics.
+
+```text
+  ┌──────────────────────────┐          ┌──────────────────────────┐          ┌──────────────────────────┐
+  │    gold.dim_customers    │          │     gold.fact_sales      │          │    gold.dim_products     │
+  ├──────────────────────────┤          ├──────────────────────────┤          ├──────────────────────────┤
+  │ PK │ customer_key   ◄────┼──────────┤ FK2│ customer_key        │          │ PK │ product_key    ◄───┐│
+  ├────┴─────────────────────┤          │ FK1│ product_key   ──────┼──────────┴────┴────────────────────┘│
+  │      customer_id         │          │      order_number        │          │      product_id          │
+  │      customer_number     │          │      order_date          │          │      product_number      │
+  │      first_name          │          │      shipping_date       │          │      product_name        │
+  │      last_name           │          │      due_date            │          │      category_id         │
+  │      country             │          │      sales_amount        │          │      category            │
+  │      marital_status      │          │      quantity            │          │      subcategory         │
+  │      gender              │          │      price               │          │      maintenance         │
+  │      birthdate           │          └───────────┬──────────────┘          │      cost                │
+  │      country             │                      │                         │      product_line        │
+  └──────────────────────────┘                      │                         │      start_date          │
+                                                    │                         └──────────────────────────┘
+                                                    │
+                                           📊 Sales Calculation:
+                                         Sales = Quantity * Price
+```
+
 ## Prerequisites
 
 - **Microsoft SQL Server** – 2025 version was used on the entire project.
