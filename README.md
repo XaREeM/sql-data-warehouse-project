@@ -15,8 +15,44 @@ This project builds an end‑to‑end SQL data warehouse from CSV source files u
 ![Medallion+architecture](https://github.com/user-attachments/assets/2e8ba68c-01ea-4137-a43b-fdb4527f5271)
 
 ---
+### 🗺️ System Integration Model (+ Table Relationships)
 
+Below is the visual representation of how the **CRM** and **ERP** systems are integrated within this pipeline.
 
+```text
+       ┌───────────────────────────────┐               ┌───────────────────────────────┐
+       │             CRM               │               │             ERP               │
+       └───────────────┬───────────────┘               └───────────────┬───────────────┘
+                       │                                               │
+   ┌───────────────────┴───────────────────┐                           │
+   │           crm_sales_details           │                           │
+   │      (Sales & Order Transactions)     │                           │
+   ├───────────────────────────────────────┤                           │
+   │  prd_key  ──────────┐                 │                           │
+   │  cst_id   ──────────┼─────────┐       │                           │
+   └─────────────────────┼─────────┼───────┘                           │
+                         │         │                                   │
+             ┌───────────▼─────────┴──────────┐            ┌───────────▼───────────┐
+             │          crm_prd_info          │            │    erp_px_cat_g1v2    │
+             │   (Current & History Product)  │◄───────────┤  (Product Categories) │
+             ├────────────────────────────────┤            ├───────────────────────┤
+             │  prd_key                       │            │  id                   │
+             └────────────────────────────────┘            └───────────────────────┘
+                                   │
+             ┌─────────────────────▼──────────┐            ┌───────────────────────┐
+             │          crm_cust_info         │            │     erp_cust_az12     │
+             │     (Customer Information)     │      ┌─────┤ (Birthdate/Extra Info)│
+             ├────────────────────────────────┤      │     ├───────────────────────┤
+             │  cst_id                        │      │     │  cid                  │
+             │  cst_key                       │◄─────│     └───────────────────────┘
+             └────────────────────────────────┘      │
+                                                     │     ┌───────────────────────┐
+                                                     │     │     erp_loc_a101      │
+                                                     └─────┤  (Customer Location)  │
+                                                           ├───────────────────────┤
+                                                           │  cid                  │
+                                                           └───────────────────────┘
+```
 ---
 
 ## Prerequisites
