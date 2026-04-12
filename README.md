@@ -21,9 +21,9 @@ This project builds an end‑to‑end SQL data warehouse from CSV source files u
 
 ## Prerequisites
 
-- **Microsoft SQL Server** (2017 or later) – Developer or Express edition works fine.
-- **SQL Server Management Studio (SSMS)** or **Azure Data Studio** – to run scripts.
-- **Git Bash** – for version control and cloning the repository.
+- **Microsoft SQL Server** – 2025 version was used on the entire project.
+- **SQL Server Management Studio (SSMS)** – to run scripts.
+- **Git Bash** – for version control, cloning, and pushing local machine adjustments into the repository.
 - **Access to file system** – SQL Server must be able to read the CSV files (local or network path).
 
 
