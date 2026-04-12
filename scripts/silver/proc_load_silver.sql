@@ -1,4 +1,19 @@
- EXEC silver.load_silver
+/*
+==============================================
+Stored Procedure: Load Silver Layer (Bronze -> Silver)
+==============================================
+Script purpose:
+	This script loads data into the 'silver' schema from the already loaded 'bronze' schema, performing the following:
+	- Truncate tables before loading data.
+	- Inserting into 'silver' tables data that is laoded from 'bronze' layer
+	- Calcuate the time of loading for each table and the whole batch as well.
+
+No parameters required for this procedure.
+
+Use the following command for execution:
+	-  EXEC silver.load_silver;
+*/
+
 
 CREATE OR ALTER PROCEDURE silver.load_silver AS
 BEGIN
